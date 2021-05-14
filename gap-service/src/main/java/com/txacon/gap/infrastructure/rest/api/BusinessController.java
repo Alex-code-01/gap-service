@@ -147,7 +147,7 @@ public class BusinessController {
     }
 
     @GetMapping("/{businessId}/menu")
-    public ResponseEntity<byte[]> businessMenu(@PathVariable @NotNull @Min(0) @Max(Long.MAX_VALUE) Long businessId) throws JRException, IOException {
+    public ResponseEntity<byte[]> businessMenu(@PathVariable @NotNull @Min(0) @Max(Long.MAX_VALUE) Long businessId) throws JRException {
         final String filename = "menu.pdf";
         Business business = service.findById(businessId);
         JasperPrint jasperPrint = menuReport.createPdfReport(business);
@@ -157,9 +157,8 @@ public class BusinessController {
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDispositionFormData(filename, filename);
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-
-        ResponseEntity<byte[]> response = new ResponseEntity<>(JasperExportManager.exportReportToPdf(jasperPrint), headers, HttpStatus.OK);
-        return response;
+        
+        return ResponseEntity<>(JasperExportManager.exportReportToPdf(jasperPrint), headers, HttpStatus.OK);
     }
 
 }

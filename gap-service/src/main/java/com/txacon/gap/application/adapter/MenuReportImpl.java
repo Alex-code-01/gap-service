@@ -33,11 +33,8 @@ public class MenuReportImpl implements MenuReport {
             parameters.put("businessId", business.getId());
             parameters.put("businessName", business.getName());
             parameters.put("businessDescription", business.getDescription());
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,
-                    dataSource.getConnection());
-
-            return jasperPrint;
+            
+            return JasperFillManager.fillReport(jasperReport, parameters, dataSource.getConnection());
         } catch (Exception exception) {
             log.error("Error on render report", exception);
             throw new BusinessInvalidException(ApiError.ERROR_ON_REPORT_RENDER);

@@ -33,15 +33,6 @@ public class LoadMasterTablesCommandLineRunner implements CommandLineRunner {
     private final CustomerService customerService;
     private final PasswordEncoderMapper passwordEncoderMapper;
 
-    @Override
-    public void run(String... args) throws Exception {
-//        inserRoles();
-//        insertKeyEntity(tagRepository, TagName.values());
-//        insertKeyEntity(ratingRepository, AggregateRating.values());
-//        insertKeyEntity(priceRangeRepository, PriceRange.values());
-//        insertTestUser();
-    }
-
     private void insertTestUser() {
         Customer customer = createTestUser();
         createUser(customer);

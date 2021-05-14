@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.4.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <groupId>com.txacon.gap</groupId>
+  <artifactId>gap-service</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>gap-service</name>
+  <description>Proyecto GAP</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<mapstruct.version>1.4.1.Final</mapstruct.version>
+		<!-- Sonar properties -->
+		<sonar.projectKey>gap-service</sonar.projectKey>
+		<sonar.organization>txacon</sonar.organization>
+    <sonar.projectVersion>${version}</sonar.projectVersion>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.exclusions>**/generated/**/*, **/*.xml</sonar.exclusions>
+    <sonar.coverage.exclusions>
+      **/domain/**/*
+    </sonar.coverage.exclusions>
+	</properties>
+
+  <repositories>
+    <repository>
+      <id>maven-central</id>
+      <name>Manven central repository</name>
+      <url>https://mvnrepository.com/artifact/org.springframework.boot/spring-boot</url>
+    </repository>
+  </repositories>
+
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>28.1-jre</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- Reports-->
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports</artifactId>
+      <version>6.16.0</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports-fonts</artifactId>
+      <version>6.16.0</version>
+    </dependency>
+    <!-- Dev tools -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!-- DB DRIVERS -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+    <!-- UTILS -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!-- OBJECT MAPPER -->
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>${mapstruct.version}</version>
+    </dependency>
+    <!-- API DOCUMENTATION -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-boot-starter</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>1.5.20</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- Site skin -->
+    <dependency>
+      <groupId>org.apache.maven.skins</groupId>
+      <artifactId>maven-default-skin</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <!-- TEST -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.junit.vintage</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <parameters>true</parameters>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+            <path>
+              <groupId>org.mapstruct</groupId>
+              <artifactId>mapstruct-processor</artifactId>
+              <version>${mapstruct.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <!-- Configuración para análisis de calidad -->
+      <!-- Java code coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.6</version>
+        <configuration>
+          <!-- Sets the path to the file which contains the execution data. -->
+          <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+          <!-- Sets the path to the file which contains the execution data. -->
+          <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+          <!-- Sets the output directory for the code coverage report. -->
+          <!-- <outputDirectory>${project.reporting.outputDirectory}</outputDirectory> -->
+        </configuration>
+        <executions>
+          <!--
+           Prepares the property pointing to the JaCoCo runtime agent which
+           is passed as VM argument when Maven the Surefire plugin is executed.
+          -->
+          <execution>
+            <id>jacoco-initialize</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-site</id>
+            <phase>package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- FindBugs Configuration -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>3.0.5</version>
+        <configuration>
+          <!-- FindBugs will show what is doing during analysis.  -->
+          <debug>true</debug>
+          <!--
+                     Enables analysis which takes more memory but finds more bugs.
+                     If you run out of memory, changes the value of the effort element
+                     to 'min'. Min|Default|Max are possible values.
+                    -->
+          <effort>Min</effort>
+          <!-- Reports all bugs (other values are High|Normal|Low|Exp|Ignore) -->
+          <threshold>High</threshold>
+          <xmlOutput>true</xmlOutput>
+          <!-- Optional directory to save findbugs xdoc xml report -->
+          <xmlOutputDirectory>${project.reporting.outputDirectory}</xmlOutputDirectory>
+
+          <!-- Indicates to analyze only given java packages, We are allowing everything here. -->
+          <!-- <onlyAnalyze>com.*</onlyAnalyze> -->
+
+          <failOnError>true</failOnError>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <!-- This goal will check code and generate report -->
+              <goal>findbugs</goal>
+              <!-- Fail the build if there were any findBugs violations in the source code. Uncomment if needed -->
+              <!-- This goal includes both findbugs and check -->
+              <!-- <goal>check</goal>-->
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.5</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>jxr</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- PMD Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.6</version>
+        <configuration>
+          <!-- Run PMD on the tests. Default: false -->
+          <includeTests>false</includeTests>
+          <!-- Skip the PMD checks. Most useful on the command line via "-Dpmd.skip=true" -->
+          <skip>false</skip>
+          <!-- Print details of check failures to build output. -->
+          <verbose>true</verbose>
+          <!-- Link the violation line numbers to the source xref. Links will be created
+                     automatically if the jxr plugin is being used. Default: true -->
+          <linkXRef>true</linkXRef>
+          <!-- Set the output format type, in addition to the HTML report. Must be
+                     one of: "none", "csv", "xml", "txt" or the full class name of the PMD renderer
+                     to use. See the net.sourceforge.pmd.renderers package javadoc for available
+                     renderers. XML is required if the pmd:check goal is being used. Default: xml-->
+          <format>xml</format>
+          <!-- Fail build if there are high priority warnings during pmd:check. Default value is 5 -->
+          <failurePriority>1</failurePriority>
+          <!-- A list of files to include from checking. Can contain Ant-style wildcards
+                     and double wildcards. Defaults to **\/*.java.-->
+          <includes>
+            <include>com/**/*.java</include>
+          </includes>
+
+          <!-- A list of files to exclude from checking. Can contain Ant-style wildcards
+                     and double wildcards. We are not excluding anything here. -->
+          <!-- <excludes>
+                     <exclude></exclude>
+                    </excludes> -->
+
+          <!-- The output directory for the final HTML report.  -->
+          <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+
+          <!-- The output directory for the intermediate XML report. -->
+          <targetDirectory>${project.build.directory}</targetDirectory>
+
+          <rulesets>
+            <!-- Multiple rule set xmls can be included here. -->
+            <ruleset>${basedir}/pmd_ruleset.xml</ruleset>
+          </rulesets>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <!-- Creates a PMD report. -->
+              <goal>pmd</goal>
+              <!-- Fail the build if there were any PMD violations in the source code. Uncomment if needed -->
+              <!--<goal>check</goal>-->
+
+              <!-- Creates a report for PMD's copy paste detector tool -->
+              <goal>cpd</goal>
+              <!-- Fail the build if there were any CPD violations in the source code. Uncomment if needed -->
+
+              <!-- <goal>cpd-check</goal> -->
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Checkstyle plugin -->
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.17</version>
+        <executions>
+          <execution>
+            <id>checkstyle</id>
+            <phase>package</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <!-- Fail build if violations found -->
+              <failOnViolation>true</failOnViolation>
+              <!-- External configuration file location -->
+              <configLocation>${basedir}/checkstyle.xml</configLocation>
+              <!-- Includes packages as per the given wild card config. -->
+              <includes>com/txacon/**/*.java</includes>
+              <!-- Excludes packages as per the given wild card config. -->
+              <excludes>**/rest/mapper/**/*,**/jpa/**/mapper/**/*</excludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Report plugins -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.8.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.8.2</version>
+        <configuration>
+          <project name="gap-service" combine.self="override"></project>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+
+      <!-- To publish JUnit test results -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+      </plugin>
+
+      <!-- To publish PMD reports-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.5</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.6</version>
+        <configuration>
+          <includes>
+            <include>com/**/*.java</include>
+          </includes>
+          <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+          <targetDirectory>${project.build.directory}</targetDirectory>
+          <rulesets>
+            <ruleset>${basedir}/pmd_ruleset.xml</ruleset>
+          </rulesets>
+        </configuration>
+      </plugin>
+
+      <!-- To publish findBugs report -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>3.0.5</version>
+        <configuration>
+          <debug>true</debug>
+          <effort>Min</effort>
+          <threshold>Low</threshold>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>${project.reporting.outputDirectory}</xmlOutputDirectory>
+          <failOnError>true</failOnError>
+        </configuration>
+      </plugin>
+
+      <!-- To publish Java code coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.6</version>
+        <configuration>
+          <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+          <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </reporting>
+</project>

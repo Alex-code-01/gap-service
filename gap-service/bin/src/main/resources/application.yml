@@ -1,0 +1,25 @@
+debug: false
+
+## secret jwt
+jwt:
+  secret: 'hb27$$4-rmo5w^7pfc4ph7ul*ft8+%r*cwouj=^69e16-!+xju'
+
+spring:
+  jpa:
+    database: h2
+    show-sql: true
+    hibernate.ddl-auto: update
+
+---
+spring:
+  profiles: docker
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate.ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/gap
+    username: test
+    password: test
+

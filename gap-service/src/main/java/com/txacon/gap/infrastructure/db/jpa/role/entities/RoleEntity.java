@@ -26,7 +26,7 @@ public class RoleEntity extends BaseEntity implements Serializable {
     private String name;
     @ToString.Exclude
     @ManyToMany(mappedBy = "roles")
-    Set<CustomerEntity> customers = new HashSet<>();
+    private Set<CustomerEntity> customers = new HashSet<>();
 
 
     public Set<CustomerEntity> getCustomers() {

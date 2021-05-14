@@ -37,10 +37,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private String secret;
 
     @Bean
-    public PasswordEncoder bCryptPasswordEncoder() {
-        MyBcryptPasswordEncoder bCryptPasswordEncoder = new MyBcryptPasswordEncoder(
-                BCryptPasswordEncoder.BCryptVersion.$2B, 12);
-        return bCryptPasswordEncoder;
+    public PasswordEncoder bCryptPasswordEncoder() {       
+        return MyBcryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2B, 12);
     }
 
     @Override
@@ -66,7 +64,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), secret));
 
     }
-
+    @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         // Se define la clase que recupera los usuarios y el algoritmo para procesar las
         // passwords

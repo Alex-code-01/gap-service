@@ -23,7 +23,7 @@ public class PriceRangeEntity extends BaseEntity implements Serializable {
     @ToString.Exclude
     @Getter
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "priceRange")
-    Set<BusinessEntity> businesses = new HashSet<>();
+    private Set<BusinessEntity> businesses = new HashSet<>();
 
 
 }

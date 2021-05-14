@@ -10,13 +10,11 @@ import com.txacon.gap.infrastructure.db.jpa.pricerange.mapper.PriceRangeMapper;
 import com.txacon.gap.infrastructure.db.jpa.product.entities.ProductEntity;
 import com.txacon.gap.infrastructure.db.jpa.product.mapper.ProductMapper;
 import com.txacon.gap.infrastructure.db.jpa.rating.mapper.AggregateRatingMapper;
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
